@@ -2,9 +2,6 @@
 
 
 var parachuteManSprite
-{
-	
-}
 var cloudSprite;
 var birdSprite;
 
@@ -13,7 +10,7 @@ var timeStart;
 var deviceAccelerationX;
 
  document.write("<script src='canvasJS.js' type='text/javascript'></script>");
-
+ document.write("<script src='sprite.js' type='text/javascript'></script>");
 
 
 
