@@ -14,5 +14,10 @@ function InitialiseCanvas()
 	CanvasResize();
 }
 
+function updateCanvas()
+{
+
+}
+
 
 

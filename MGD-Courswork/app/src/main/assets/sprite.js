@@ -32,6 +32,11 @@ class aSprite
 	this.x = deltaTime * this.vx;
 	this.y = deltaTime * this.vy;
 	}
+
+	animateSprite()
+	{
+
+	}
 	
 }
 

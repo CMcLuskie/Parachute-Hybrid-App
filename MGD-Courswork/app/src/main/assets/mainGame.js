@@ -1,22 +1,15 @@
-
-var canvasContext;
-
-var parachuteMan;
-var cloudSprite;
-var birdSprite;
-
-var timeStart;
-
-var deviceAccelerationX;
-
-var gameOver;
-
  document.write("<script src='canvasJS.js' type='text/javascript'></script>");
  document.write("<script src='sprite.js' type='text/javascript'></script>");
  document.write("<script src='rendering.js' type='text/javascript'></script>");
  document.write("<script src='gameLogic.js' type='text/javascript'></script>");
+ document.write("<script src='player.js' type='text/javascript'></script>");
 
+ var deviceAccelerationX;
 
+ var rightPressed;
+ var leftPressed;
+ 
+ var timeStart;
 
 function load()
 {
@@ -38,6 +31,8 @@ function Initialise()
 		AddListeners();
 		CanvasResize();	
 		InitialiseSprites();
+		LogicStart();
+		timeStart = Date.now();
 	}
 }
 
@@ -45,7 +40,7 @@ function GameLoop()
 {
 	var timeElapsed = (Date.now() - timeStart) / 1000 ;
 	
-	GameUpdate(timeElapsed);
+	LogicUpdate(timeElapsed);
 	GameRender(timeElapsed);
 	timeStart = Date.now();
 	requestAnimationFrame(GameLoop);
@@ -62,6 +57,8 @@ function AddListeners()
 	canvas.addEventListener("touchend", UpTouch, false);
 	
 	document.addEventListener('keydown', function(){KeyDown(event);});
+	document.addEventListener('keyup', function(){KeyUp(event);});
+
 
 	document.body.addEventListener("touchcancel", UpTouch, false);
 }
@@ -72,11 +69,24 @@ function KeyDown(event)
 	switch(event.which)
 	{
 		case 37://left arrow
-			parachuteMan.xPosition -= 100;
+		leftPressed = true;
+	break;
+	case 39://right arrow
+		rightPressed = true;			
+	break;
+	}
+	
+}
+
+function KeyUp(event)
+{
+	switch(event.which)
+	{
+		case 37://left arrow
+			leftPressed = false;
 		break;
 		case 39://right arrow
-			var newpos = parachuteMan.xPosition + 100;
-			parachuteMan.xPosition = Lerp(parachuteMan.xPosition, newpos, .1);
+			rightPressed = false;			
 		break;
 	}
 	
@@ -100,7 +110,7 @@ function XYTouch()
 function DeviceMotion(evt)
 {
 	if(evt.acceleration.x > 1)
-		UpdateSprite("parachuteMan", parachuteManSprite.x, parachuteManSprite.y, 1, 0);
+		parachuteMan.Move("Left");
 }
 
 function Lerp(start, end, time)
