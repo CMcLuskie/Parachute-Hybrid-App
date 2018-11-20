@@ -10,6 +10,8 @@ function LogicStart()
 function LogicUpdate()
 {
    ProcessInput();
+   MoveEnemies();
+   CollisionDetection();
 }
 
 function ProcessInput()
@@ -23,11 +25,28 @@ function ProcessInput()
 
 function InitialiseObjects()
 {
-    parachuteMan = new Player(0, 0, "Art/man.png", 0 , 0);
-    birds[0] = new Player(100, 100, "Art/birdSheet.png", 0, 0);
+    parachuteMan = new Player(0, 0, "Art/parachuteMan.png", 0 , 0);
+    //birds[0] = new Enemy(0, canvas.height - 100, "Art/birdSheet.png", 0, 0);
+    birds[0] = new Enemy(0, 700, "Art/birdSheet.png", 0, 0);
+
+}
+
+function CollisionDetection()
+{
+    if(BoundingBoxCollision(parachuteMan.xPosition, birds[0].xPosition,
+        parachuteMan.yPosition, birds[0].yPosition, 
+        parachuteMan.width, birds[0].width, 
+        parachuteMan.height, birds[0].height))
+       alert("collision");
 }
 
 function EnemySpawn()
 {
 
+}
+
+function MoveEnemies()
+{
+     birds[0].Move("Right");
+     birds[0].Move("Up");
 }

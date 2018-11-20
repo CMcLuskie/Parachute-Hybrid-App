@@ -8,5 +8,8 @@ function GameRender()
 {
 	canvasContext.clearRect(0, 0, canvas.width, canvas.height);
 	parachuteMan.Render();
+	parachuteMan.Animate();
 	birds[0].Render();
+	birds[0].Animate();
+
 }
