@@ -4,6 +4,9 @@
  document.write("<script src='gameLogic.js' type='text/javascript'></script>");
  document.write("<script src='player.js' type='text/javascript'></script>");
  document.write("<script src='enemy.js' type='text/javascript'></script>");
+ document.write("<script src='sound.js' type='text/javascript'></script>");
+ //document.write("<script src='iSound.java' type='text/java'></script>");
+
 
  var deviceAccelerationX;
 
@@ -11,6 +14,8 @@
  var leftPressed;
  
  var timeStart;
+
+ var soundManager;
 
 function load()
 {
@@ -34,7 +39,11 @@ function Initialise()
 		InitialiseSprites();
 		LogicStart();
 		timeStart = Date.now();
+
+		if (soundManager != null) {soundManager.playMusic(0); //Play main music
+			alert("here");
 	}
+}
 }
 
 function GameLoop()

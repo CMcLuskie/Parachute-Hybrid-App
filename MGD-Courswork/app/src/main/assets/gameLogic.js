@@ -11,7 +11,7 @@ function LogicUpdate()
 {
    ProcessInput();
    MoveEnemies();
-   CollisionDetection();
+  // CollisionDetection();
 }
 
 function ProcessInput()
@@ -33,6 +33,7 @@ function InitialiseObjects()
 
 function CollisionDetection()
 {
+    //use stroke rect to draw collison box
     if(BoundingBoxCollision(parachuteMan.xPosition, birds[0].xPosition,
         parachuteMan.yPosition, birds[0].yPosition, 
         parachuteMan.width, birds[0].width, 
