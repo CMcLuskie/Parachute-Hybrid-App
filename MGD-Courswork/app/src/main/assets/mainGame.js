@@ -4,9 +4,6 @@
  document.write("<script src='gameLogic.js' type='text/javascript'></script>");
  document.write("<script src='player.js' type='text/javascript'></script>");
  document.write("<script src='enemy.js' type='text/javascript'></script>");
- document.write("<script src='sound.js' type='text/javascript'></script>");
- //document.write("<script src='iSound.java' type='text/java'></script>");
-
 
  var deviceAccelerationX;
 
@@ -78,6 +75,9 @@ function KeyDown(event)
 {
 	switch(event.which)
 	{
+		case 13:
+		WorldBounds();
+		break;
 		case 37://left arrow
 		leftPressed = true;
 	break;

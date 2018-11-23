@@ -1,11 +1,15 @@
 class Player extends aSprite
 {
-    constructor(spriteX, spriteY, spriteSource, spriteVelX, spriteVelY)
+    constructor(spriteX, spriteY, spriteSource, spriteVelX, spriteVelY, scaleX, scaleY)
     {
         super(spriteX, spriteY, spriteSource, spriteVelX, spriteVelY, 1, 625, 625, 1);
+        this.xSize = scaleX;
+        this.ySize = scaleY;
     }
 
-    
+	get scaleX(){ return this.xSize; }
+    get scaleY(){ return this.ySize; }
+   
     get bodyWidth(){ return 125; }
     get bodyHeight(){return 208; }
 

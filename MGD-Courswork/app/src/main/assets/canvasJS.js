@@ -14,10 +14,11 @@ function InitialiseCanvas()
 	CanvasResize();
 }
 
-function updateCanvas()
+function WorldBounds()
 {
-
+	return canvas.width;	
 }
+
 
 
 

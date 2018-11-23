@@ -12,6 +12,8 @@ function LogicUpdate()
    ProcessInput();
    MoveEnemies();
   // CollisionDetection();
+
+  if(parachuteMan.xPosition >= WorldBounds()) alert("WORKS");
 }
 
 function ProcessInput()
@@ -25,9 +27,9 @@ function ProcessInput()
 
 function InitialiseObjects()
 {
-    parachuteMan = new Player(0, 0, "Art/parachuteMan.png", 0 , 0);
+    parachuteMan = new Player(0, 0, "Art/parachuteMan.png", 0 , 0, 0.5, 0.5);
     //birds[0] = new Enemy(0, canvas.height - 100, "Art/birdSheet.png", 0, 0);
-    birds[0] = new Enemy(0, 700, "Art/birdSheet.png", 0, 0);
+    birds[0] = new Enemy(0, 700, "Art/birdSheet.png", 0, 0, .5, .5);
 
 }
 
@@ -48,6 +50,6 @@ function EnemySpawn()
 
 function MoveEnemies()
 {
-     birds[0].Move("Right");
-     birds[0].Move("Up");
+     birds[0].Move("Right", .2);
+     birds[0].Move("Up", .1);
 }

@@ -7,6 +7,7 @@ class aSprite
 		this.y = y;
 		this.vx = velX;
 		this.vy = velY;
+		
 		this.sImage = new Image();
 		this.sImage.src = imageSource;
 
@@ -27,7 +28,7 @@ class aSprite
 	get yPosition(){ return this.y;}
 	get width(){return this.frameWidth; }
 	get height(){return this.frameHeight; }
-	
+
 	
 	set xPosition(newPosition){ this.x = newPosition;}
 	set yPosition(newPosition){ this.y = newPosition;}
