@@ -2,7 +2,7 @@ class Enemy extends aSprite
 {
     constructor(spriteX, spriteY, spriteSource, spriteVelX, spriteVelY, scaleX, scaleY)
     {
-        super(spriteX, spriteY, spriteSource, spriteVelX, spriteVelY, 14,  182 , 170, 5);
+        super(spriteX, spriteY, spriteSource, spriteVelX, spriteVelY, 14,  182 , 170, 5, 0, 60, 50, 90, 90);
         this.xSize = scaleX;
         this.ySize = scaleY;
     }
@@ -11,6 +11,8 @@ class Enemy extends aSprite
     get scaleY(){ return this.ySize; }
     // get width(){super.width();}
     // get height(){super.height();}
+
+    Collider(){ return super.collider; }
 
     Render()
     {
@@ -39,5 +41,13 @@ class Enemy extends aSprite
                 this.yPosition = Lerp(this.yPosition, newpos, speed);
                 break;
         }
+    }
+
+    
+    DrawBoxCollider()
+    {
+        canvasContext.strokeRect(this.Collider().x, this.Collider().y, this.Collider().width, this.Collider().height);
+        // alert("coll x: " + this.Collider().x +"coll y: " + this.Collider().y +
+        // "coll width: " +this.Collider().width + "coll height: " + this.Collider().height);
     }
 }

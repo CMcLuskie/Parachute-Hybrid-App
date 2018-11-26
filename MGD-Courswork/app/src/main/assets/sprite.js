@@ -1,6 +1,6 @@
 class aSprite
 {
-	constructor(x, y, imageSource, velX, velY, frameAmount, frameWidth, frameHeight, framesPerLayer, layerIndex)
+	constructor(x, y, imageSource, velX, velY, frameAmount, frameWidth, frameHeight, framesPerLayer, layerIndex, cX, cY, cWidth, cHeight)
 	{
 		this.zindex = 0;
 		this.x = x;
@@ -22,6 +22,11 @@ class aSprite
 		
 		this.tickCount = 0;
 		this.ticksPerFrame = 4;
+
+		this.colliderX = cX;
+        this.colliderY = cY;
+        this.colliderWidth = cWidth;
+        this.colliderHeight = cHeight;
 	}
 	
 	get xPosition(){ return this.x;}
@@ -29,7 +34,13 @@ class aSprite
 	get width(){return this.frameWidth; }
 	get height(){return this.frameHeight; }
 
-	
+	get collider()
+	{ 
+		var rect = {x: this.xPosition + this.colliderX , y: this.yPosition + this.colliderY,
+			 width: this.colliderWidth, height: this.colliderHeight}; 
+		return rect;
+	}
+
 	set xPosition(newPosition){ this.x = newPosition;}
 	set yPosition(newPosition){ this.y = newPosition;}
 

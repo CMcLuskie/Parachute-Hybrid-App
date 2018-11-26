@@ -9,6 +9,8 @@
 
  var rightPressed;
  var leftPressed;
+ var upPressed;
+ var downPressed;
  
  var timeStart;
 
@@ -75,15 +77,34 @@ function KeyDown(event)
 {
 	switch(event.which)
 	{
-		case 13:
-		WorldBounds();
-		break;
+		case 13://enter key (used for testing)
+
+			break;
 		case 37://left arrow
 		leftPressed = true;
-	break;
-	case 39://right arrow
-		rightPressed = true;			
-	break;
+			break;
+		case 38://up arrow
+			upPressed = true;
+			break;
+		case 39://right arrow
+			rightPressed = true;			
+			break;
+		case 40://down arrow
+			downPressed = true;
+			break;
+		case 65://a
+			leftPressed = true;
+			break;
+		case 68://d
+			rightPressed = true;
+			break;
+		case 83://s
+			downPressed = true;
+			break;
+		case 87://w
+			upPressed = true;
+			break;
+		
 	}
 	
 }
@@ -93,11 +114,30 @@ function KeyUp(event)
 	switch(event.which)
 	{
 		case 37://left arrow
-			leftPressed = false;
-		break;
+		leftPressed = false;
+			break;
+		case 38://up arrow
+			upPressed = false;
+			break;
 		case 39://right arrow
 			rightPressed = false;			
-		break;
+			break;
+		case 40://down arrow
+			downPressed = false;
+			break;
+		case 65://a
+			leftPressed = false;
+			break;
+		case 68://d
+			rightPressed = false;
+			break;
+		case 83://s
+			downPressed = false;
+			break;
+		case 87://w
+			upPressed = false;
+			break;
+		
 	}
 	
 }
@@ -128,11 +168,8 @@ function Lerp(start, end, time)
 	return (1- time) * start + time * end;
 }
 
-function BoundingBoxCollision(x1, x2, y1, y2, width1, width2, height1, height2)
+function BoundingBoxCollision(rect1, rect2)
 {
-	var rect1 = {x: x1, y: y1, width: width1, height: height1};
-	var rect2 = {x: x2, y: y2, width: width2, height: height2};
-
 	if((rect1.x < rect2.x + rect2.width) && (rect1.x + rect1.width > rect2.x)
 		&& (rect1.y < rect2.y + rect2.height) && (rect1.y + rect1.height > rect2.y))
 		{
@@ -144,5 +181,15 @@ function BoundingBoxCollision(x1, x2, y1, y2, width1, width2, height1, height2)
 function CircleCollision()
 {
 
+}
+
+function getRandomX()
+{
+	return Math.floor((Math.random() * canvas.width) + canvas.width);
+}
+
+function getRandomY()
+{
+	return Math.floor((Math.random() * canvas.height) + canvas.height);
 }
 
