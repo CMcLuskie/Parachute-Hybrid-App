@@ -5,12 +5,31 @@ class Enemy extends aSprite
         super(spriteX, spriteY, spriteSource, spriteVelX, spriteVelY, 14,  182 , 170, 5, 0, 60, 50, 90, 90);
         this.xSize = scaleX;
         this.ySize = scaleY;
+        this.dir = "Right";
     }
 
     get scaleX(){ return this.xSize; }
     get scaleY(){ return this.ySize; }
     // get width(){super.width();}
     // get height(){super.height();}
+
+    get Dir(){ return this.dir; }
+
+    set Dir(direction)
+    {
+        if(direction == "Right")
+            return this.dir = "Left";
+        else
+            return this.dir = "Right";
+    }
+
+    get rotation()
+    {
+        if(this.dir == "Right")
+            return 0;
+        else
+            return (180 * (Math.PI / 180));
+    }
 
     Collider(){ return super.collider; }
 
@@ -19,6 +38,7 @@ class Enemy extends aSprite
         return super.render();
     }
 
+    
     Animate()
     {
         return super.animateSprite();        
@@ -33,16 +53,22 @@ class Enemy extends aSprite
                 this.xPosition = Lerp(this.xPosition, newpos, speed);
                 break;
             case "Left":
-                var newpos = this.xPosition - 100;
+                var newpos = this.xPosition - 25;
                 this.xPosition = Lerp(this.xPosition, newpos, speed);
                 break;
             case "Up":
-                var newpos = this.yPosition - 25;
+                var newpos = this.yPosition - 5;
                 this.yPosition = Lerp(this.yPosition, newpos, speed);
                 break;
         }
+
+    
     }
 
+    PositionRect()
+    {
+        super.PositionRect();
+    }
     
     DrawBoxCollider()
     {

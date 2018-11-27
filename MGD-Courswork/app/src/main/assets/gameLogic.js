@@ -11,22 +11,22 @@ function LogicUpdate()
 {
     ProcessInput();
     MoveEnemies();
-    //CollisionDetection();
+    CollisionDetection();
     EnemyWorldCheck();
-    if(parachuteMan.xPosition >= WorldBounds()) alert("WORKS");
+    //if(parachuteMan.xPosition >= WorldBounds()) alert("WORKS");
 
   
 }
 
 function ProcessInput()
 {
-    if(rightPressed && (parachuteMan.xPosition + parachuteMan.width / 2  < canvas.width))
+    if(rightPressed && (parachuteMan.Collider().x + parachuteMan.Collider().width  < canvas.width / parachuteMan.scaleX))
         parachuteMan.Move("Right");
-    else if (leftPressed && (parachuteMan.xPosition - parachuteMan.width / 2  > 0))
+    else if (leftPressed && (parachuteMan.Collider().x > 0))
         parachuteMan.Move("Left");
-    else if(upPressed)
+    else if(upPressed && (parachuteMan.Collider().y > 0))
         parachuteMan.Move("Up");
-    else if (downPressed)
+    else if (downPressed && (parachuteMan.Collider().y + parachuteMan.Collider().height < canvas.height / parachuteMan.scaleY))
         parachuteMan.Move("Down");
     
 }
@@ -35,9 +35,9 @@ function InitialiseObjects()
 {
     parachuteMan = new Player(0, 0, "Art/parachuteMan.png", 0 , 0, 0.5, 0.5, 260, 410, 100, 200);
     //birds[0] = new Enemy(0, canvas.height - 100, "Art/birdSheet.png", 0, 0);
-    birds[0] = new Enemy(getRandomX(), getRandomY(), "Art/birdSheet.png", 0, 0, .5, .5);
-    birds[1] = new Enemy(getRandomX(), getRandomY(), "Art/birdSheet.png", 0, 0, .5, .5);
-    birds[2] = new Enemy(getRandomX(), getRandomY(), "Art/birdSheet.png", 0, 0, .5, .5);
+    birds[0] = new Enemy(0, getRandomY(), "Art/birdSheet.png", 0, 0, .5, .5);
+    birds[1] = new Enemy(0, getRandomY(), "Art/birdSheet.png", 0, 0, .5, .5);
+    birds[2] = new Enemy(0, getRandomY(), "Art/birdSheet.png", 0, 0, .5, .5);
 
 }
 
@@ -54,22 +54,23 @@ function EnemySpawn()
 
 function EnemyWorldCheck()
 {
-    if((birds[0].xPosition - birds[0].width / 2) > canvas.width)
+    for(var i = 0; i < birds.length; i++)
     {
-        birds[0].xPosition = 0;
-        birds[0].yPosition = getRandomY();
+        if((birds[i].xPosition) > canvas.width)
+        {
+            birds[i].Dir = birds[i].Dir;
+        }
+        else if((birds[i].xPosition) < 0)
+        {
+            birds[i].Dir = birds[i].Dir;
+        }
     }
-           
-
 }
 function MoveEnemies()
 {
-    birds[0].Move("Right", .2);
-    birds[0].Move("Up", .1);
-
-    birds[1].Move("Right", .2);
-    birds[1].Move("Up", .1);
-
-    birds[2].Move("Right", .2);
-    birds[2].Move("Up", .1);
+    for(var i = 0; i < birds.length; i++)
+    {
+        birds[i].Move(birds[i].Dir, .2);
+        birds[i].Move("Up", .2);
+    }
 }

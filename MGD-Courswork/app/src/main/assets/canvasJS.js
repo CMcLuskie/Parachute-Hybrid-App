@@ -18,7 +18,3 @@ function WorldBounds()
 {
 	return canvas.width;	
 }
-
-
-
-

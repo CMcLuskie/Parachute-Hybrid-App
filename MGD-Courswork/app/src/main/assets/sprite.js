@@ -68,7 +68,10 @@ class aSprite
 	this.y = deltaTime * this.vy;
 	}
 
-	
+	PositionRect()
+	{
+		canvasContext.strokeRect(this.x, this.y, this.sImage.width, this.sImage.height);
+	}
 
 	animateSprite()
 	{
