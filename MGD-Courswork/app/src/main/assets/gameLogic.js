@@ -1,5 +1,7 @@
 var parachuteMan;
-var birds = ['bird1', 'bird2', 'bird3'];
+var birds = [];
+var background;
+var background2;
 var gameOver;
 var score = 0;
 function LogicStart()
@@ -11,9 +13,11 @@ function LogicUpdate()
 {
     ProcessInput();
     MoveEnemies();
-    CollisionDetection();
+    //CollisionDetection();
     EnemyWorldCheck();
     UpdateScore();
+    background.Update();
+    background2.Update();
 }
 
 function ProcessInput()
@@ -33,17 +37,17 @@ function UpdateScore()
 {
     score++;
     canvasContext.font = "30px Arial";
-    canvasContext.fillText("Score: " + score, 0, 0);
+    canvasContext.fillText("Score: " + score, canvas.width / 2, canvas.height / 2);
 }
 
 function InitialiseObjects()
 {
     parachuteMan = new Player(0, 0, "Art/parachuteMan.png", 0 , 0, 0.5, 0.5, 260, 410, 100, 200);
-    //birds[0] = new Enemy(0, canvas.height - 100, "Art/birdSheet.png", 0, 0);
-    for(var i = 0; i < 4; i++)
-        birds[i] = new Enemy(0, getRandomY(), "Art/birdSheet.png", 0, 0, .5, .5);
-    
+    background = new Background(0, canvas.height ,"Art/skyLoop.png", 0, 0, 1, canvas.width, canvas.height * 2, 1, 1, 1, 1, 1, 1, -10 );
+    background2 = new Background(0, canvas.height * 2,"Art/skyLoop.png", 0, 0, 1, canvas.width, canvas.height * 2, 1, 1, 1, 1, 1, 1, -10 );
 
+    for(var i = 0; i < 4; i++)
+        birds[i] = new Enemy(0, getRandomY(), "Art/birdSheet.png", 0, 0, .5, .5);  
 }
 
 function CollisionDetection()
@@ -62,15 +66,26 @@ function EnemyWorldCheck()
 {
     for(var i = 0; i < birds.length; i++)
     {
-        if((birds[i].xPosition) > canvas.width / birds[i].scaleX)
+        if((birds[i].xPosition) + birds[i].width > canvas.width / birds[i].scaleX)
         {
             birds[i].xPosition = -1;
+            birds[i].Dir = birds[i].Dir;
         }
-        // else if((birds[i].xPosition) < 0)
-        // {
-        //     birds[i].Dir = birds[i].Dir;
-        // }
+        else if((birds[i].xPosition) < 0)
+        {
+            birds[i].Dir = birds[i].Dir;
+        }
     }
+}
+
+function EnemyBounce()
+{
+
+}
+
+function EnemyLoop()
+{
+
 }
 function MoveEnemies()
 {

@@ -9,6 +9,18 @@ function GameRender()
 	canvasContext.clearRect(0, 0, canvas.width, canvas.height);
 	
 	canvasContext.save();
+	canvasContext.scale(background.scaleX, background.scaleY);
+	background.Render();
+	//parachuteMan.DrawBoxCollider();
+	canvasContext.restore();
+
+	canvasContext.save();
+	canvasContext.scale(background2.scaleX, background2.scaleY);
+	background2.Render();
+	//parachuteMan.DrawBoxCollider();
+	canvasContext.restore();
+
+	canvasContext.save();
 	canvasContext.scale(parachuteMan.scaleX, parachuteMan.scaleY);
 	parachuteMan.Render();
 	parachuteMan.Animate();

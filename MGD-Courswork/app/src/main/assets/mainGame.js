@@ -4,6 +4,8 @@
  document.write("<script src='gameLogic.js' type='text/javascript'></script>");
  document.write("<script src='player.js' type='text/javascript'></script>");
  document.write("<script src='enemy.js' type='text/javascript'></script>");
+ document.write("<script src='Background.js' type='text/javascript'></script>");
+
 
  var deviceAccelerationX;
 
@@ -192,4 +194,3 @@ function getRandomY()
 {
 	return Math.floor((Math.random() * canvas.height) + canvas.height);
 }
-
