@@ -21,10 +21,17 @@ function GameRender()
 	canvasContext.restore();
 
 	canvasContext.save();
+	canvasContext.scale(coin.scaleX, coin.scaleY);
+	coin.Render();
+	coin.Animate();
+	coin.DrawBoxCollider();
+	canvasContext.restore();
+
+	canvasContext.save();
 	canvasContext.scale(parachuteMan.scaleX, parachuteMan.scaleY);
 	parachuteMan.Render();
 	parachuteMan.Animate();
-	//parachuteMan.DrawBoxCollider();
+	parachuteMan.DrawBoxCollider();
 	canvasContext.restore();
 
 	for(var i = 0; i < birds.length; i++)
@@ -33,10 +40,16 @@ function GameRender()
 		canvasContext.scale(birds[i].scaleX, birds[i].scaleY);
 		//canvasContext.rotate(birds[i].rotation);
 		birds[i].Render();
-		//birds[i].DrawBoxCollider();
+		birds[i].DrawBoxCollider();
 		birds[i].Animate();
 		canvasContext.restore()
 	}
+
+	canvasContext.save();
+	canvasContext.font = "30px Arial";
+	canvasContext.fillText("Score: " + score, 100, 100);
+	canvasContext.restore();
+
 
 	canvasContext.save();
 	canvasContext.strokeRect(1,1, canvas.width - 2, canvas.height - 2);

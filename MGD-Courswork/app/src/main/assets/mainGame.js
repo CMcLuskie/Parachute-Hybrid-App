@@ -5,6 +5,7 @@
  document.write("<script src='player.js' type='text/javascript'></script>");
  document.write("<script src='enemy.js' type='text/javascript'></script>");
  document.write("<script src='Background.js' type='text/javascript'></script>");
+ document.write("<script src='Coin.js' type='text/javascript'></script>");
 
 
  var deviceAccelerationX;

@@ -1,12 +1,11 @@
 class aSprite
 {
-	constructor(x, y, imageSource, velX, velY, frameAmount, frameWidth, frameHeight, framesPerLayer, layerIndex, cX, cY, cWidth, cHeight)
+	constructor(x, y, imageSource, frameAmount, frameWidth, frameHeight, framesPerLayer, cX, cY, cWidth, cHeight)
 	{
 		this.zindex = 0;
 		this.x = x;
 		this.y = y;
-		this.vx = velX;
-		this.vy = velY;
+	
 		
 		this.sImage = new Image();
 		this.sImage.src = imageSource;

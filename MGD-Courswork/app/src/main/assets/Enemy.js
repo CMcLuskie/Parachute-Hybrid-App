@@ -1,8 +1,8 @@
 class Enemy extends aSprite
 {
-    constructor(spriteX, spriteY, spriteSource, spriteVelX, spriteVelY, scaleX, scaleY)
+    constructor(spriteX, spriteY, spriteSource, scaleX, scaleY)
     {
-        super(spriteX, spriteY, spriteSource, spriteVelX, spriteVelY, 14,  182 , 170, 5, 0, 60, 50, 90, 90);
+        super(spriteX, spriteY, spriteSource,  14,  182 , 170, 5, 60, 50, 90, 90);
         this.xSize = scaleX;
         this.ySize = scaleY;
         this.dir = "Right";

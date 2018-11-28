@@ -1,8 +1,8 @@
 class Background extends aSprite
 {
-    constructor(x, y, imageSource, velX, velY, frameAmount, frameWidth, frameHeight, framesPerLayer, layerIndex, cX, cY, cWidth, cHeight, scrollSpeed)
+    constructor(x, y, imageSource, frameAmount, frameWidth, frameHeight, framesPerLayer, layerIndex, cX, cY, cWidth, cHeight, scrollSpeed)
     {
-        super(x, y, imageSource, velX, velY, frameAmount, frameWidth, frameHeight, framesPerLayer, layerIndex, cX, cY, cWidth, cHeight);
+        super(x, y, imageSource, frameAmount, frameWidth, frameHeight, framesPerLayer, layerIndex, cX, cY, cWidth, cHeight);
     
         this.speed = scrollSpeed;        
     }
@@ -20,7 +20,7 @@ class Background extends aSprite
         var newPos = this.yPosition + 1;
         this.yPosition = Lerp(this.yPosition, newPos, this.speed);
         
-        if(this.yPosition < 0)
-            this.yPosition = canvas.height * 2;
+        if(this.yPosition + this.frameHeight < 0)
+            this.yPosition = canvas.height - 10;
     }
 }

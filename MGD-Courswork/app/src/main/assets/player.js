@@ -1,8 +1,8 @@
 class Player extends aSprite
 {
-    constructor(spriteX, spriteY, spriteSource, spriteVelX, spriteVelY, scaleX, scaleY, cX, cY, cWidth, cHeight)
+    constructor(spriteX, spriteY, spriteSource, scaleX, scaleY, cX, cY, cWidth, cHeight)
     {
-        super(spriteX, spriteY, spriteSource, spriteVelX, spriteVelY, 1, 625, 625, 1, 0, cX, cY, cWidth, cHeight);
+        super(spriteX, spriteY, spriteSource, 1, 625, 625, 1, cX, cY, cWidth, cHeight);
         this.xSize = scaleX;
         this.ySize = scaleY;
 
@@ -57,7 +57,5 @@ class Player extends aSprite
     DrawBoxCollider()
     {
         canvasContext.strokeRect(this.Collider().x, this.Collider().y, this.Collider().width, this.Collider().height);
-        //  alert("coll x: " + this.Collider().x +"coll y: " + this.Collider().y +
-        //  "coll width: " +this.Collider().width + "coll height: " + this.Collider().height);
     }
 }
