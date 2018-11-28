@@ -57,7 +57,7 @@ class Enemy extends aSprite
                 this.xPosition = Lerp(this.xPosition, newpos, speed);
                 break;
             case "Up":
-                var newpos = this.yPosition - 5;
+                var newpos = this.yPosition + 1;
                 this.yPosition = Lerp(this.yPosition, newpos, speed);
                 break;
         }

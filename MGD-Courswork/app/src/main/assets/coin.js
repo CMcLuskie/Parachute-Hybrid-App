@@ -32,7 +32,26 @@ class Coin extends aSprite
 
     DrawBoxCollider()
     {
-        console.log("draw coin coll");
         canvasContext.strokeRect(this.Collider().x, this.Collider().y, this.Collider().width, this.Collider().height);
     }
+
+    Move(direction, speed)
+    {
+        switch(direction)
+        {
+            case "Right":
+                var newpos = this.xPosition + 25;
+                this.xPos = Lerp(this.xPosition, newpos, speed);
+                break;
+            case "Left":
+                var newpos = this.xPosition - 25;
+                this.xPos = Lerp(this.xPosition, newpos, speed);
+                break;
+            case "Up":
+                var newpos = this.yPosition + 1;
+                this.yPos = Lerp(this.yPosition, newpos, speed);
+                break;
+        }
+
+    }   
 }

@@ -2,9 +2,11 @@ var parachuteMan;
 var birds = [];
 var background;
 var background2;
-var coin;
+var coins = [];
 var gameOver;
 var score = 0;
+
+var fallSpeed = -10;
 function LogicStart()
 {
     InitialiseObjects();
@@ -16,9 +18,10 @@ function LogicUpdate()
     MoveEnemies();
     CollisionDetection();
     EnemyWorldCheck();
-    UpdateScore();
     background.Update();
     background2.Update();
+    MoveCoins();
+    CoinWorldCheck();
 }
 
 function ProcessInput()
@@ -29,14 +32,14 @@ function ProcessInput()
         parachuteMan.Move("Left");
     // else if(upPressed && (parachuteMan.Collider().y > 0))
     //     parachuteMan.Move("Up");
-    else if (downPressed && (parachuteMan.Collider().y + parachuteMan.Collider().height < canvas.height / parachuteMan.scaleY))
-        parachuteMan.Move("Down");
+    //else if (downPressed && (parachuteMan.Collider().y + parachuteMan.Collider().height < canvas.height / parachuteMan.scaleY))
+        // parachuteMan.Move("Down");
     
 }
 
-function UpdateScore()
+function UpdateScore(amount)
 {
-    score++;
+    score += amount;
     
 }
 
@@ -46,9 +49,10 @@ function InitialiseObjects()
     background = new Background(0, 0 ,"Art/skyLoop.png", 1, canvas.width, canvas.height, 1, 1, 1, 1, 1, 1, -10 );
     background2 = new Background(0, canvas.height ,"Art/skyLoop.png", 1, canvas.width, canvas.height, 1, 1, 1, 1, 1, 1, -10 );
 
-    coin = new Coin(getRandomX(),getRandomY() ,"Art/dogeCoin.png", .5, .5);
+    for(var i = 0; i < 1; i++)
+        coins[i] = new Coin(getRandomX(),getRandomY() ,"Art/dogeCoin.png", .5, .5);
 
-    for(var i = 0; i < 4; i++)
+    for(var i = 0; i < 1; i++)
         birds[i] = new Enemy(0, getRandomY(), "Art/birdSheet.png", .5, .5);  
 }
 
@@ -58,21 +62,31 @@ function CollisionDetection()
         if(BoundingBoxCollision(parachuteMan.Collider(), birds[i].Collider()))
          alert("collision");
 
-    if(BoundingBoxCollision(parachuteMan.Collider(), coin.Collider()))
-        CollectCoin();
+    for(var i = 0; i < coins.length; i++)
+        if(BoundingBoxCollision(parachuteMan.Collider(), coins[i].Collider()))
+            CollectCoin(i);
 }
 
-function CollectCoin()
+function CollectCoin(index)
 {
     console.log("cCollected COin");
-    coin.xPos = getRandomX();
-    coin.yPos = getRandomY();
-    score += 1000;
+    coins[index].xPos = getRandomX();
+    coins[index].yPos = getRandomY();
+    UpdateScore(100);
 }
 
 function EnemySpawn()
 {
 
+}
+
+function CoinWorldCheck()
+{
+    for(var i=0; i<coins.length;i++)
+    {
+        if((coins[i].yPosition + coins[i].height) < 0)
+            coins[i].yPosition = canvas.height / coins[i].scaleY;
+    }
 }
 
 function EnemyWorldCheck()
@@ -81,13 +95,17 @@ function EnemyWorldCheck()
     {
         if((birds[i].xPosition) + birds[i].width > canvas.width / birds[i].scaleX)
         {
-            birds[i].xPosition = -1;
-          //  birds[i].Dir = birds[i].Dir;
+            //birds[i].xPosition = -1;
+            birds[i].Dir = birds[i].Dir;
         }
-        // else if((birds[i].xPosition) < 0)
-        // {
-        //     birds[i].Dir = birds[i].Dir;
-        // }
+        else if((birds[i].xPosition) < 0)
+        {
+            birds[i].Dir = birds[i].Dir;
+        }
+
+        if((birds[i].yPosition + birds[i].height) < 0)
+            birds[i].yPosition = canvas.height / birds[i].scaleY;
+        
     }
 }
 
@@ -100,11 +118,20 @@ function EnemyLoop()
 {
 
 }
+
+function MoveCoins()
+{
+    for(var i = 0; i < coins.length; i++)
+    {
+        coins[i].Move("Up", fallSpeed);
+    }
+}
+
 function MoveEnemies()
 {
     for(var i = 0; i < birds.length; i++)
     {
-        birds[i].Move(birds[i].Dir, .2);
-        birds[i].Move("Up", .2);
+        birds[i].Move(birds[i].Dir, .3);
+        birds[i].Move("Up", fallSpeed);
     }
 }

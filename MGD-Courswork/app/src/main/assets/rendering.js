@@ -21,18 +21,22 @@ function GameRender()
 	canvasContext.restore();
 
 	canvasContext.save();
-	canvasContext.scale(coin.scaleX, coin.scaleY);
-	coin.Render();
-	coin.Animate();
-	coin.DrawBoxCollider();
-	canvasContext.restore();
-
-	canvasContext.save();
 	canvasContext.scale(parachuteMan.scaleX, parachuteMan.scaleY);
 	parachuteMan.Render();
 	parachuteMan.Animate();
 	parachuteMan.DrawBoxCollider();
 	canvasContext.restore();
+
+	for(var i = 0; i < coins.length; i++)
+	{
+		canvasContext.save();
+		canvasContext.scale(coins[i].scaleX, coins[i].scaleY);
+		//canvasContext.rotate(birds[i].rotation);
+		coins[i].Render();
+		coins[i].DrawBoxCollider();
+		coins[i].Animate();
+		canvasContext.restore()
+	}
 
 	for(var i = 0; i < birds.length; i++)
 	{
