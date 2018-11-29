@@ -6,13 +6,31 @@ var coins = [];
 var gameOver;
 var score = 0;
 
+var startScreen;
+
 var fallSpeed = -10;
 function LogicStart()
 {
     InitialiseObjects();
+    ChangeGameState("Start");
 }
 
 function LogicUpdate()
+{
+    if(currentGameState == "Start")
+        StartState();
+    else if(currentGameState == "Play")
+        PlayState();
+    else if(currentGameState == "GameOver")
+        GameOverState();
+}
+
+function StartState()
+{
+
+}
+
+function PlayState()
 {
     ProcessInput();
     MoveEnemies();
@@ -22,6 +40,11 @@ function LogicUpdate()
     background2.Update();
     MoveCoins();
     CoinWorldCheck();
+}
+
+function GameOverState()
+{
+
 }
 
 function ProcessInput()
@@ -45,6 +68,8 @@ function UpdateScore(amount)
 
 function InitialiseObjects()
 {
+    startScreen = new Background(0,0, "Art/startScreen.png", 1, canvas.width, canvas.height, 1, 1, 0,0,0,0,0);
+
     parachuteMan = new Player(0, 0, "Art/parachuteMan.png", 0.5, 0.5, 260, 410, 100, 200);
     background = new Background(0, 0 ,"Art/skyLoop.png", 1, canvas.width, canvas.height, 1, 1, 1, 1, 1, 1, -10 );
     background2 = new Background(0, canvas.height ,"Art/skyLoop.png", 1, canvas.width, canvas.height, 1, 1, 1, 1, 1, 1, -10 );
@@ -71,6 +96,7 @@ function CollectCoin(index)
 {
     console.log("cCollected COin");
     coins[index].xPos = getRandomX();
+    if(coins[index].xPos)
     coins[index].yPos = getRandomY();
     UpdateScore(100);
 }

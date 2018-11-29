@@ -6,6 +6,10 @@
  document.write("<script src='enemy.js' type='text/javascript'></script>");
  document.write("<script src='Background.js' type='text/javascript'></script>");
  document.write("<script src='Coin.js' type='text/javascript'></script>");
+ document.write("<script src='GameStatesManager.js' type='text/javascript'></script>");
+ document.write("<script src='menuManager.js' type='text/javascript'></script>");
+ document.write("<script src='Button.js' type='text/javascript'></script>");
+
 
 
  var deviceAccelerationX;
@@ -15,6 +19,10 @@
  var upPressed;
  var downPressed;
  
+ var clicking;
+ var clickX;
+ var clickY;
+
  var timeStart;
 
  var soundManager;
@@ -39,6 +47,7 @@ function Initialise()
 		AddListeners();
 		CanvasResize();	
 		InitialiseSprites();
+		InitialiseButtons();
 		LogicStart();
 		timeStart = Date.now();
 
@@ -53,6 +62,7 @@ function GameLoop()
 	var timeElapsed = (Date.now() - timeStart) / 1000 ;
 	
 	LogicUpdate(timeElapsed);
+	MenuUpdate();
 	GameRender(timeElapsed);
 	timeStart = Date.now();
 	requestAnimationFrame(GameLoop);
@@ -64,15 +74,17 @@ function AddListeners()
 	window.addEventListener('orientationchange', CanvasResize, false);
 	window.addEventListener('devicemotion', DeviceMotion)
 
-	canvas.addEventListener("touchstart", DownTouch, false);
-	canvas.addEventListener("touchmove", XYTouch, true);
-	canvas.addEventListener("touchend", UpTouch, false);
+	// canvas.addEventListener("touchstart", DownTouch, false);
+	// canvas.addEventListener("touchmove", XYTouch, true);
+	// canvas.addEventListener("touchend", UpTouch, false);
 	
 	document.addEventListener('keydown', function(){KeyDown(event);});
 	document.addEventListener('keyup', function(){KeyUp(event);});
+	document.addEventListener('mousedown', function(){ClickDown(event);});
+	document.addEventListener('mouseup', function(){ClickUp(event);});
 
 
-	document.body.addEventListener("touchcancel", UpTouch, false);
+	//document.body.addEventListener("touchcancel", UpTouch, false);
 }
 
 
@@ -145,19 +157,17 @@ function KeyUp(event)
 	
 }
 
-function DownTouch()
+function ClickDown(event)
 {
-	
+	 clicking = true;
+	 clickX = event.screenX;
+	 clickY = event.screenY;
+	 console.log("click x: " + clickX + "click y: " + clickY);
 }
 
-function UpTouch()
+function ClickUp(event)
 {
-	
-}
-
-function XYTouch()
-{
-	
+	clicking = false;
 }
 
 function DeviceMotion(evt)
@@ -188,10 +198,17 @@ function CircleCollision()
 
 function getRandomX()
 {
-	return Math.floor((Math.random() * canvas.width) + canvas.width);
+	return Math.floor((Math.random() * canvas.width));
 }
 
 function getRandomY()
 {
 	return Math.floor((Math.random() * canvas.height) + canvas.height);
+}
+
+function ClickRect(x, y)
+{
+	// console.log(x);
+	// console.log(y);
+	return rect = {x: x, y: y, width: 1, height: 1};
 }

@@ -7,17 +7,40 @@ function InitialiseSprites()
 function GameRender()
 {
 	canvasContext.clearRect(0, 0, canvas.width, canvas.height);
+
+	if(currentGameState == "Start")
+        StartMenuRender();
+    else if(currentGameState == "Play")
+        GamePlayRender();
+    else if(currentGameState == "GameOver")
+        GameOverRender();
+}
+
+function StartMenuRender()
+{
+	canvasContext.save();
+	canvasContext.scale(startScreen.scaleX, startScreen.scaleY);
+	startScreen.Render();
+	canvasContext.restore();	 
+
+	canvasContext.save();
+	canvasContext.scale(playButton.scaleX, playButton.scaleY);
+	playButton.Render();
+	playButton.DrawBoxCollider();
+	canvasContext.restore();	 
+}
+
+function GamePlayRender()
+{
 	
 	canvasContext.save();
 	canvasContext.scale(background.scaleX, background.scaleY);
 	background.Render();
-	//parachuteMan.DrawBoxCollider();
 	canvasContext.restore();
 
 	canvasContext.save();
 	canvasContext.scale(background2.scaleX, background2.scaleY);
 	background2.Render();
-	//parachuteMan.DrawBoxCollider();
 	canvasContext.restore();
 
 	canvasContext.save();
@@ -33,7 +56,7 @@ function GameRender()
 		canvasContext.scale(coins[i].scaleX, coins[i].scaleY);
 		//canvasContext.rotate(birds[i].rotation);
 		coins[i].Render();
-		coins[i].DrawBoxCollider();
+		//coins[i].DrawBoxCollider();
 		coins[i].Animate();
 		canvasContext.restore()
 	}
@@ -44,7 +67,7 @@ function GameRender()
 		canvasContext.scale(birds[i].scaleX, birds[i].scaleY);
 		//canvasContext.rotate(birds[i].rotation);
 		birds[i].Render();
-		birds[i].DrawBoxCollider();
+		//birds[i].DrawBoxCollider();
 		birds[i].Animate();
 		canvasContext.restore()
 	}
@@ -58,4 +81,9 @@ function GameRender()
 	canvasContext.save();
 	canvasContext.strokeRect(1,1, canvas.width - 2, canvas.height - 2);
 	canvasContext.restore();
+}
+
+function GameOverRender()
+{
+	
 }
