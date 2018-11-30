@@ -8,7 +8,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
-            "url": "C:/Users/CMclus200/Documents/GitHub/MGD-Coursework/MGD-Courswork/app/src/main/assets/courseworkHTML.html",
+            "url": "C:/Users/cmclus200/Documents/GitHub/MGD-Coursework/MGD-Courswork/app/src/main/assets/courseworkHTML.html",
             "webRoot": "${workspaceFolder}"
         }
     ]

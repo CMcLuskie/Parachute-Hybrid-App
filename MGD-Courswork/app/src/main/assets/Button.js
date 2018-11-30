@@ -15,6 +15,7 @@ class Button extends aSprite
     get isPressed(){ return this.isPressed; }
     set isPressed(newState){return this.isPressed = newState; }
 
+
     Render()
     {
         super.render();

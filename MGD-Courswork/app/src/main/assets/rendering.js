@@ -85,5 +85,20 @@ function GamePlayRender()
 
 function GameOverRender()
 {
-	
+	canvasContext.save();
+	canvasContext.scale(background.scaleX, background.scaleY);
+	background.Render();
+	canvasContext.restore();
+
+	canvasContext.save();
+	canvasContext.scale(background2.scaleX, background2.scaleY);
+	background2.Render();
+	canvasContext.restore();
+
+	canvasContext.save();
+	canvasContext.font = "100px Chiller";
+	canvasContext.fillText("You Died with a score of: " + score, 0, canvas.height / 2);
+	canvasContext.fillText("Tap anywhere to retry", 0, (canvas.height / 2) + 75);
+
+	canvasContext.restore();
 }

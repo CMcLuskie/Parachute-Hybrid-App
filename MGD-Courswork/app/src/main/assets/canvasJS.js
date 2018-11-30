@@ -17,4 +17,4 @@ function InitialiseCanvas()
 function WorldBounds()
 {
 	return canvas.width;	
-}
+}	

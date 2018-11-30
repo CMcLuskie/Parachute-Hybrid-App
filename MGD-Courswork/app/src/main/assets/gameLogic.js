@@ -5,7 +5,7 @@ var background2;
 var coins = [];
 var gameOver;
 var score = 0;
-
+var lives = 3;
 var startScreen;
 
 var fallSpeed = -10;
@@ -13,10 +13,11 @@ function LogicStart()
 {
     InitialiseObjects();
     ChangeGameState("Start");
+    
 }
 
 function LogicUpdate()
-{
+{   
     if(currentGameState == "Start")
         StartState();
     else if(currentGameState == "Play")
@@ -27,7 +28,34 @@ function LogicUpdate()
 
 function StartState()
 {
+    lives = 3;
+    score = 0;
+    
+    console.log("here");
+    background.Background = "Art/skyLoop.png";
+    background2.Background = "Art/skyLoop.png";
+    
+    
+    
+        for(var i = 0; i < birds.length; i++)
+        {
+            birds[i].xPosition = 0;
+            birds[i].yPosition = getRandomY();
+        }
 
+        for(var i = 0; i < coins.length; i++)
+        {
+            coins[i].xPosition = getRandomX();
+            coins[i].yPosition = getRandomY();
+        }
+
+
+    if(clicking)
+    //if(clicking && CollisionDetection(ClickRect(clickX / playButton.scaleX, clickY / playButton.scaleY), playButton.Collider()))
+        if(canChangeState)  
+            ChangeGameState("Play");
+
+    canChangeState= true;
 }
 
 function PlayState()
@@ -44,7 +72,16 @@ function PlayState()
 
 function GameOverState()
 {
+    background.Background = "Art/deathScreen.png";
+    background2.Background = "Art/deathScreen.png";
 
+    background.Update();
+    background2.Update();
+
+    if(clicking && canChangeState)
+        ChangeGameState("Start");
+
+        canChangeState= true;
 }
 
 function ProcessInput()
@@ -85,7 +122,7 @@ function CollisionDetection()
 {
     for(var i = 0; i < birds.length; i++)
         if(BoundingBoxCollision(parachuteMan.Collider(), birds[i].Collider()))
-         alert("collision");
+            TakeDamage(1);
 
     for(var i = 0; i < coins.length; i++)
         if(BoundingBoxCollision(parachuteMan.Collider(), coins[i].Collider()))
@@ -160,4 +197,12 @@ function MoveEnemies()
         birds[i].Move(birds[i].Dir, .3);
         birds[i].Move("Up", fallSpeed);
     }
+}
+
+function TakeDamage(damage)
+{
+    lives -= damage;
+
+    if(lives <= 0)
+        ChangeGameState("GameOver")
 }

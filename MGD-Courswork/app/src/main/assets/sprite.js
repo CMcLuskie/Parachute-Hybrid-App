@@ -43,6 +43,7 @@ class aSprite
 	set xPosition(newPosition){ this.x = newPosition;}
 	set yPosition(newPosition){ this.y = newPosition;}
 
+	set Background(filePath){return this.sImage.src = filePath; }
 
 	renderF(width, height)
 	{
