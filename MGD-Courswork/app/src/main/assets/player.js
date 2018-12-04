@@ -20,7 +20,6 @@ class Player extends aSprite
     // get collWidth(){ return this.colliderWidth; }
     // get collHeight(){ return this.colliderHeight; }
 
-
     Collider(){ return super.collider; }
     Render()
     {

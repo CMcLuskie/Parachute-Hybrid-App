@@ -13,8 +13,3 @@ function InitialiseCanvas()
 	canvasContext = canvas.getContext('2d');
 	CanvasResize();
 }
-
-function WorldBounds()
-{
-	return canvas.width;	
-}	

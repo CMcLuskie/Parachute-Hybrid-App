@@ -10,6 +10,9 @@ class Background extends aSprite
     get yPosition(){ return super.yPosition; }
     set yPosition(newPos){ return super.yPosition = newPos; }
 
+    get scaleX(){return 0.5; }
+    get scaleY(){return 0.5; }
+
     set Background(filePath){ return super.Background = filePath; }
     Render()
     {
@@ -21,7 +24,7 @@ class Background extends aSprite
         var newPos = this.yPosition + 1;
         this.yPosition = Lerp(this.yPosition, newPos, this.speed);
         
-        if(this.yPosition + this.frameHeight < 0)
-            this.yPosition = canvas.height - 10;
+        if(this.yPosition + this.frameHeight <= 0)
+            this.yPosition = canvas.height + 2000;
     }
 }

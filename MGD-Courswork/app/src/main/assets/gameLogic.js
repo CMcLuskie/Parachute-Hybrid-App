@@ -31,24 +31,20 @@ function StartState()
     lives = 3;
     score = 0;
     
-    console.log("here");
     background.Background = "Art/skyLoop.png";
     background2.Background = "Art/skyLoop.png";
-    
-    
-    
-        for(var i = 0; i < birds.length; i++)
-        {
-            birds[i].xPosition = 0;
-            birds[i].yPosition = getRandomY();
-        }
 
-        for(var i = 0; i < coins.length; i++)
-        {
-            coins[i].xPosition = getRandomX();
-            coins[i].yPosition = getRandomY();
-        }
+    for(var i = 0; i < birds.length; i++)
+    {
+        birds[i].xPosition = 0;
+        birds[i].yPosition = getRandomY();
+    }
 
+    for(var i = 0; i < coins.length; i++)
+    {
+        coins[i].xPosition = getRandomX();
+        coins[i].yPosition = getRandomY();
+    }
 
     if(clicking)
     //if(clicking && CollisionDetection(ClickRect(clickX / playButton.scaleX, clickY / playButton.scaleY), playButton.Collider()))
@@ -100,18 +96,19 @@ function ProcessInput()
 function UpdateScore(amount)
 {
     score += amount;
+	soundManager.playSound(0);
     
 }
 
 function InitialiseObjects()
 {
-    startScreen = new Background(0,0, "Art/startScreen.png", 1, canvas.width, canvas.height, 1, 1, 0,0,0,0,0);
+    startScreen = new Background(-100,0, "Art/startScreen.png", 1, 1440, 2960, 1, 1, 0,0,0,0,0);
 
     parachuteMan = new Player(0, 0, "Art/parachuteMan.png", 0.5, 0.5, 260, 410, 100, 200);
-    background = new Background(0, 0 ,"Art/skyLoop.png", 1, canvas.width, canvas.height, 1, 1, 1, 1, 1, 1, -10 );
-    background2 = new Background(0, canvas.height ,"Art/skyLoop.png", 1, canvas.width, canvas.height, 1, 1, 1, 1, 1, 1, -10 );
+    background = new Background(-100, 0 ,"Art/skyLoop.png", 1, 1440,2960, 1, 1, 1, 1, 1, 1, -10 );
+    background2 = new Background(-100, 2960 ,"Art/skyLoop.png", 1, 1440, 2960, 1, 1, 1, 1, 1, 1, -10 );
 
-    for(var i = 0; i < 1; i++)
+    for(var i = 0; i < 4; i++)
         coins[i] = new Coin(getRandomX(),getRandomY() ,"Art/dogeCoin.png", .5, .5);
 
     for(var i = 0; i < 1; i++)
@@ -203,6 +200,7 @@ function TakeDamage(damage)
 {
     lives -= damage;
 
+    soundManager.playSound(1);
     if(lives <= 0)
         ChangeGameState("GameOver")
 }

@@ -35,16 +35,21 @@ public class iSound {
     //load sounds into sound pool
     try {
     //Load sound using the asset file descriptor
-    AssetFileDescriptor afd = ctx.getAssets().openFd("Sounds/countryMusic.wav");
+    AssetFileDescriptor afd = ctx.getAssets().openFd("Sounds/coinCollect.wav");
     //store the id outputted by the sound pool in the sound effects array
     soundIDs[0] = sounds.load(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength(), 0);
+    //Load sound using the asset file descriptor
+     afd = ctx.getAssets().openFd("Sounds/damageTaken.wav");
+    //store the id outputted by the sound pool in the sound effects array
+    soundIDs[1] = sounds.load(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength(), 0);
+    
     afd.close();
     }
     catch(Exception e) {
     e.printStackTrace();
     }
    
-    musicIDs[0] = "Sounds/music.mp3";
+    musicIDs[0] = "Sounds/countryMusic.wav";
    
     music = new MediaPlayer();
     }

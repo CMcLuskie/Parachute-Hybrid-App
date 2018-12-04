@@ -1,0 +1,5 @@
+ TextView textView;
+    Typeface font;
+    textView = (TextView)findViewById(R.id.text_view_id);
+    font = Typeface.createFromAsset(this.getAssets(), "Fonts/chiller.ttf");
+        textView.setTypeface(font);

@@ -3,9 +3,9 @@
  document.write("<script src='rendering.js' type='text/javascript'></script>");
  document.write("<script src='gameLogic.js' type='text/javascript'></script>");
  document.write("<script src='player.js' type='text/javascript'></script>");
- document.write("<script src='enemy.js' type='text/javascript'></script>");
+ document.write("<script src='Enemy.js' type='text/javascript'></script>");
  document.write("<script src='Background.js' type='text/javascript'></script>");
- document.write("<script src='Coin.js' type='text/javascript'></script>");
+ document.write("<script src='coin.js' type='text/javascript'></script>");
  document.write("<script src='GameStatesManager.js' type='text/javascript'></script>");
  document.write("<script src='menuManager.js' type='text/javascript'></script>");
  document.write("<script src='Button.js' type='text/javascript'></script>");
@@ -33,7 +33,7 @@ function load()
 	InitialiseCanvas();
 	Initialise();
 
-	canvasX= canvas.width / 2;
+	canvasX = canvas.width / 2;
 	canvasY = canvas.height - 30;
 
 	if(!gameOver)
@@ -51,9 +51,10 @@ function Initialise()
 		LogicStart();
 		timeStart = Date.now();
 
-		if (soundManager != null) {soundManager.playMusic(0); //Play main music
-			alert("here");
-	}
+		if (soundManager != null)
+		{
+			soundManager.playMusic(0); //Play main music
+		}
 }
 }
 
@@ -74,14 +75,14 @@ function AddListeners()
 	window.addEventListener('orientationchange', CanvasResize, false);
 	window.addEventListener('devicemotion', DeviceMotion)
 
-	// canvas.addEventListener("touchstart", DownTouch, false);
-	// canvas.addEventListener("touchmove", XYTouch, true);
-	// canvas.addEventListener("touchend", UpTouch, false);
+	 canvas.addEventListener("touchstart", ClickDown, false);
+	 //canvas.addEventListener("touchmove", XYTouch, true);
+	 canvas.addEventListener("touchend", ClickUp, false);
 	
-	document.addEventListener('keydown', function(){KeyDown(event);});
-	document.addEventListener('keyup', function(){KeyUp(event);});
-	document.addEventListener('mousedown', function(){ClickDown(event);});
-	document.addEventListener('mouseup', function(){ClickUp(event);});
+	document.addEventListener('keydown', function(){ KeyDown(event);});
+	document.addEventListener('keyup', function(){ KeyUp(event);});
+	document.addEventListener('mousedown', function(){ ClickDown(event);});
+	document.addEventListener('mouseup', function(){ ClickUp(event);});
 
 
 	//document.body.addEventListener("touchcancel", UpTouch, false);
@@ -121,7 +122,6 @@ function KeyDown(event)
 			break;
 		
 	}
-	
 }
 
 function KeyUp(event)
@@ -172,8 +172,22 @@ function ClickUp(event)
 
 function DeviceMotion(evt)
 {
-	if(evt.acceleration.x > 1)
-		parachuteMan.Move("Left");
+	var limit = 5;
+	if(evt.rotationRate.beta > -limit && evt.rotationRate.beta < limit)
+	{
+		leftPressed = false;
+		rightPressed = false;
+	}
+	if(evt.rotationRate.beta < -limit)
+	{
+		leftPressed = true;
+		rightPressed = false;
+	}
+	else if(evt.rotationRate.beta > limit)
+	{
+		leftPressed = false;
+		rightPressed = true;
+	}
 }
 
 function Lerp(start, end, time)

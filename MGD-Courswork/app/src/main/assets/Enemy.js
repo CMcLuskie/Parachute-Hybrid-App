@@ -25,6 +25,7 @@ class Enemy extends aSprite
 
     get rotation()
     {
+        
         if(this.dir == "Right")
             return 0;
         else

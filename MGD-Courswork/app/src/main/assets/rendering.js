@@ -47,7 +47,7 @@ function GamePlayRender()
 	canvasContext.scale(parachuteMan.scaleX, parachuteMan.scaleY);
 	parachuteMan.Render();
 	parachuteMan.Animate();
-	parachuteMan.DrawBoxCollider();
+	//parachuteMan.DrawBoxCollider();
 	canvasContext.restore();
 
 	for(var i = 0; i < coins.length; i++)
@@ -96,7 +96,7 @@ function GameOverRender()
 	canvasContext.restore();
 
 	canvasContext.save();
-	canvasContext.font = "100px Chiller";
+	canvasContext.font = "25px Chiller";
 	canvasContext.fillText("You Died with a score of: " + score, 0, canvas.height / 2);
 	canvasContext.fillText("Tap anywhere to retry", 0, (canvas.height / 2) + 75);
 
