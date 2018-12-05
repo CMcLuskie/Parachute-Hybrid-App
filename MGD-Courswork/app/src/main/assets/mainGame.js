@@ -217,7 +217,7 @@ function getRandomX()
 
 function getRandomY()
 {
-	return Math.floor((Math.random() * canvas.height) + canvas.height);
+	return Math.floor((Math.random() * canvas.height));
 }
 
 function ClickRect(x, y)
