@@ -10,8 +10,8 @@ class Background extends aSprite
     get yPosition(){ return super.yPosition; }
     set yPosition(newPos){ return super.yPosition = newPos; }
 
-    get scaleX(){return 1; }
-    get scaleY(){return 1; }
+    get scaleX(){return 0.5; }
+    get scaleY(){return 0.5; }
 
     set Background(filePath){ return super.Background = filePath; }
     Render()
