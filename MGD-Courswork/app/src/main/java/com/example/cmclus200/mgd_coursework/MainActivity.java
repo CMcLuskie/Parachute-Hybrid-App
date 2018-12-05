@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         iS = new iSound(getApplicationContext());
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        webView = (WebView)findViewById(R.id.webview1);
+        webView = findViewById(R.id.webview1);
 
         webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl("file:///android_asset/courseworkHTML.html");

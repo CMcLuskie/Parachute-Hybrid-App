@@ -102,9 +102,13 @@ function UpdateScore(amount)
 
 function InitialiseObjects()
 {
-    startScreen = new Background(-100,0, "Art/startScreen.png", 1, 1440, 2960, 1, 1, 0,0,0,0,0);
+
+    CanvasResize();
+    startScreen = new Background(-100,0, "Art/startScreen.png", 1, canvas.width, canvas.height, 1, 1, 0,0,0,0,0);
 
     parachuteMan = new Player(0, 0, "Art/parachuteMan.png", 0.5, 0.5, 260, 410, 100, 200);
+   // background = new Background(-100, 0 ,"Art/skyLoop.png", 1, 1440,2960, 1, 1, 1, 1, 1, 1, -10 );
+    //background2 = new Background(-100, 2960 ,"Art/skyLoop.png", 1, 1440, 2960, 1, 1, 1, 1, 1, 1, -10 );
     background = new Background(-100, 0 ,"Art/skyLoop.png", 1, 1440,2960, 1, 1, 1, 1, 1, 1, -10 );
     background2 = new Background(-100, 2960 ,"Art/skyLoop.png", 1, 1440, 2960, 1, 1, 1, 1, 1, 1, -10 );
 
