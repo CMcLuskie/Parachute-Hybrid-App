@@ -21,10 +21,17 @@ function StartMenuRender()
 	canvasContext.save();
 	canvasContext.scale(playButton.scaleX, playButton.scaleY);
 	playButton.Render();
-	playButton.DrawBoxCollider();
-	canvasContext.restore();	 
-}
+	//playButton.DrawBoxCollider();
+	canvasContext.restore();	
+	
+	canvasContext.save();
+	canvasContext.font = "20px Arial";
+	canvasContext.fillText("Play game by tilting device back n forth." , 0, 100);
+	canvasContext.fillText("Tap play when ready" , 100, 150);
+	
 
+	canvasContext.restore();
+}
 function GamePlayRender()
 {
 	

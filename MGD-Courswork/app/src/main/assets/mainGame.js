@@ -70,7 +70,7 @@ function AddListeners()
 	window.addEventListener('resize', CanvasResize, false);
 	window.addEventListener('devicemotion', DeviceMotion)
 
-	canvas.addEventListener("touchstart", ClickDown, false);
+	canvas.addEventListener("touchstart", TouchDown, false);
 	canvas.addEventListener("touchend", ClickUp, false);
 	
 	document.addEventListener
@@ -160,6 +160,15 @@ function ClickDown(event)
 	 console.log("click x: " + clickX + "click y: " + clickY);
 }
 
+function TouchDown(event)
+{
+	clicking= true;
+	clickX = event.touches[0].pageX;
+	 clickY = event.touches[0].pageY;
+	 console.log("touch x: " + clickX + "touch y: " + clickY);
+
+}
+
 function ClickUp(event)
 {
 	clicking = false;
@@ -218,7 +227,5 @@ function getRandomY()
 
 function ClickRect(x, y)
 {
-	 console.log("x " + x);
-	 console.log("y " + y);
 	return rect = {x: x, y: y, width: 1, height: 1};
 }

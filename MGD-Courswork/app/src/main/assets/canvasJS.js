@@ -5,6 +5,9 @@ function CanvasResize()
 {
 	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight;
+	
+	// canvas.width = 1080;
+	// canvas.height = 2220;
 }
 
 function InitialiseCanvas()	

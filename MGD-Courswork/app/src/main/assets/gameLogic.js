@@ -34,7 +34,7 @@ function StartState()
         InitialiseGameValues();
 
     if(clicking)
-    //if(clicking &&  CollisionDetection(ClickRect(clickX / playButton.scaleX , clickY / playButton.scaleY), playButton.Collider()))
+        if( BoundingBoxCollision(ClickRect(clickX / playButton.scaleX , clickY / playButton.scaleY), playButton.Collider()))
     {
         console.log("here");
         if(canChangeState)  
@@ -129,14 +129,14 @@ function BackgroundScroll()
 function InitialiseObjects()
 {
     //start
-    startScreen = new Background(-100,0, "Art/startScreen.png", 1, 1440, 2960, 1, 1, 0,0,0,0,0);
+    startScreen = new Background(0,0, "Art/startScreen.png", 1, 1080, 2220, 1, 1, 0,0,0,0,0);
     //startScreen = new Background(-100,0, "Art/startScreen.png", 1, canvas.width, canvas.height, 1, 1, 0,0,0,0,0);
 
     //gamea
     parachuteMan = new Player(0, 0, "Art/parachuteMan.png", 0.5, 0.5, 260, 410, 100, 200);
 
-    background = new Background(-100, 0 ,"Art/skyLoop.png", 1, 1440,2960, 1, 1, 1, 1, 1, 1, -10 );
-    background2 = new Background(-100, 2960 ,"Art/skyLoop.png", 1, 1440, 2960, 1, 1, 1, 1, 1, 1, -10 );
+    background = new Background(0, 0 ,"Art/skyLoop.png", 1, 1080, 2220, 1, 1, 0, 0, 0, 0, -10 );
+    background2 = new Background(0, canvas.height / .35 ,"Art/skyLoop.png", 1, 1080, 2220, 1, 1, 0, 0, 0, 0, -10);
 
     for(var i = 0; i < 4; i++)
         coins[i] = new Coin(getRandomX(),getRandomY() ,"Art/dogeCoin.png", .5, .5);
