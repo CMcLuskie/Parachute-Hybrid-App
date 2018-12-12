@@ -8,6 +8,8 @@ var score = 0;
 var lives = 3;
 var startScreen;
 
+var gameValuesInitialised;
+
 var fallSpeed = -10;
 function LogicStart()
 {
@@ -28,6 +30,20 @@ function LogicUpdate()
 
 function StartState()
 {
+    if(!gameValuesInitialised)
+        InitialiseGameValues();
+
+    if(clicking)
+    //if(clicking && 
+        //CollisionDetection(ClickRect(clickX / playButton.scaleX, clickY / playButton.scaleY), playButton.Collider()))
+        if(canChangeState)  
+            ChangeGameState("Play");
+
+    canChangeState= true;
+}
+
+function InitialiseGameValues()
+{
     lives = 3;
     score = 0;
     
@@ -46,24 +62,22 @@ function StartState()
         coins[i].yPosition = getRandomY();
     }
 
-    if(clicking)
-    //if(clicking && CollisionDetection(ClickRect(clickX / playButton.scaleX, clickY / playButton.scaleY), playButton.Collider()))
-        if(canChangeState)  
-            ChangeGameState("Play");
-
-    canChangeState= true;
+    gameValuesInitialised = true;
 }
 
 function PlayState()
 {
+    gameValuesInitialised = false;
+    //Player movement
     ProcessInput();
+    //non player movement
     MoveEnemies();
-    CollisionDetection();
-    EnemyWorldCheck();
-    background.Update();
-    background2.Update();
     MoveCoins();
+    //World edge checks
+    EnemyWorldCheck();
     CoinWorldCheck();
+    //p self explanatory tbh
+    CollisionDetection();
 }
 
 function GameOverState()
@@ -82,15 +96,12 @@ function GameOverState()
 
 function ProcessInput()
 {
-    if(rightPressed && (parachuteMan.Collider().x + parachuteMan.Collider().width  < canvas.width / parachuteMan.scaleX))
+    if(rightPressed && (parachuteMan.Collider().x 
+        + parachuteMan.Collider().
+            width  < canvas.width / parachuteMan.scaleX))
         parachuteMan.Move("Right");
     else if (leftPressed && (parachuteMan.Collider().x > 0))
-        parachuteMan.Move("Left");
-    // else if(upPressed && (parachuteMan.Collider().y > 0))
-    //     parachuteMan.Move("Up");
-    //else if (downPressed && (parachuteMan.Collider().y + parachuteMan.Collider().height < canvas.height / parachuteMan.scaleY))
-        // parachuteMan.Move("Down");
-    
+        parachuteMan.Move("Left");    
 }
 
 function UpdateScore(amount)
@@ -101,15 +112,21 @@ function UpdateScore(amount)
     
 }
 
+
+function BackgroundScroll()
+{
+    background.Update();
+    background2.Update();
+}
+
+
 function InitialiseObjects()
 {
-
-    CanvasResize();
+    //start
     startScreen = new Background(-100,0, "Art/startScreen.png", 1, 1440, 2960, 1, 1, 0,0,0,0,0);
-
+    //gamea
     parachuteMan = new Player(0, 0, "Art/parachuteMan.png", 0.5, 0.5, 260, 410, 100, 200);
-   // background = new Background(-100, 0 ,"Art/skyLoop.png", 1, 1440,2960, 1, 1, 1, 1, 1, 1, -10 );
-    //background2 = new Background(-100, 2960 ,"Art/skyLoop.png", 1, 1440, 2960, 1, 1, 1, 1, 1, 1, -10 );
+
     background = new Background(-100, 0 ,"Art/skyLoop.png", 1, 1440,2960, 1, 1, 1, 1, 1, 1, -10 );
     background2 = new Background(-100, 2960 ,"Art/skyLoop.png", 1, 1440, 2960, 1, 1, 1, 1, 1, 1, -10 );
 
@@ -136,8 +153,8 @@ function CollectCoin(index)
     console.log("cCollected COin");
     coins[index].xPos = getRandomX();
   
-    coins[index].yPos = getRandomY();
-    UpdateScore(100);
+    coins[index].yPos = canvas.height / coins[index].scaleY;
+    UpdateScore(100); 
 }
 
 function EnemySpawn()

@@ -6,6 +6,7 @@ class Enemy extends aSprite
         this.xSize = scaleX;
         this.ySize = scaleY;
         this.dir = "Right";
+        this.rotationAmount = 180;
     }
 
     get scaleX(){ return this.xSize; }
@@ -29,7 +30,7 @@ class Enemy extends aSprite
         if(this.dir == "Right")
             return 0;
         else
-            return (180 * (Math.PI / 180));
+            return (this.rotationAmount * (Math.PI / 180));
     }
 
     Collider(){ return super.collider; }

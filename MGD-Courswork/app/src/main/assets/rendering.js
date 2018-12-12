@@ -1,12 +1,7 @@
-
-function InitialiseSprites()
-{
-	//parachuteMan = new aSprite(0,0, "Art/man.png", 0, 0);
-}
-
 function GameRender()
 {
 	canvasContext.clearRect(0, 0, canvas.width, canvas.height);
+	CanvasResize();
 
 	if(currentGameState == "Start")
         StartMenuRender();
@@ -54,7 +49,6 @@ function GamePlayRender()
 	{
 		canvasContext.save();
 		canvasContext.scale(coins[i].scaleX, coins[i].scaleY);
-		//canvasContext.rotate(birds[i].rotation);
 		coins[i].Render();
 		//coins[i].DrawBoxCollider();
 		coins[i].Animate();
@@ -64,8 +58,8 @@ function GamePlayRender()
 	for(var i = 0; i < birds.length; i++)
 	{
 		canvasContext.save();
-		canvasContext.scale(birds[i].scaleX, birds[i].scaleY);
-		//canvasContext.rotate(birds[i].rotation);
+		//Rotation(birds[i]);
+		canvasContext.scale(birds[i].scaleX, birds[i].scaleY); 
 		birds[i].Render();
 		//birds[i].DrawBoxCollider();
 		birds[i].Animate();
@@ -101,4 +95,19 @@ function GameOverRender()
 	canvasContext.fillText("Tap anywhere to retry", 0, (canvas.height / 2) + 75);
 
 	canvasContext.restore();
+}
+
+function Rotation(object)
+{
+	if(object.dir == "Right")
+		canvasContext.setTransform
+			(1, 0, 0, 1, canvas.width / 2,canvas.height / 2);
+	else if(object.dir = "Left")
+		canvasContext.setTransform
+			(-1, 0, 0, 1, canvas.width / 2,canvas.height / 2);	
+}
+
+function Storage()
+{
+	
 }

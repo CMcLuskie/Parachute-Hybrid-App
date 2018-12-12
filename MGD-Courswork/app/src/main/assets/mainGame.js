@@ -24,7 +24,7 @@
  var clickY;
 
  var timeStart;
-
+ var deltaTime;
  var soundManager;
 
 function load()
@@ -32,12 +32,7 @@ function load()
 	console.log("load");
 	InitialiseCanvas();
 	Initialise();
-
-	canvasX = canvas.width / 2;
-	canvasY = canvas.height - 30;
-
-	if(!gameOver)
-		GameLoop();
+	GameLoop();
 }
 
 function Initialise()
@@ -46,7 +41,6 @@ function Initialise()
 	{
 		AddListeners();
 		CanvasResize();	
-		InitialiseSprites();
 		InitialiseButtons();
 		LogicStart();
 		timeStart = Date.now();
@@ -60,32 +54,33 @@ function Initialise()
 
 function GameLoop()
 {
-	var timeElapsed = (Date.now() - timeStart) / 1000 ;
-	
-	LogicUpdate(timeElapsed);
-	MenuUpdate();
-	GameRender(timeElapsed);
+	//delta time is the time elapsed between frames
+	deltaTime = (Date.now() - timeStart) / 1000; 
 	timeStart = Date.now();
+
+	LogicUpdate();
+	MenuUpdate();
+	GameRender();
+	
 	requestAnimationFrame(GameLoop);
 }
 
 function AddListeners()
 {
 	window.addEventListener('resize', CanvasResize, false);
-	window.addEventListener('orientationchange', CanvasResize, false);
 	window.addEventListener('devicemotion', DeviceMotion)
 
-	 canvas.addEventListener("touchstart", ClickDown, false);
-	 //canvas.addEventListener("touchmove", XYTouch, true);
-	 canvas.addEventListener("touchend", ClickUp, false);
+	canvas.addEventListener("touchstart", ClickDown, false);
+	canvas.addEventListener("touchend", ClickUp, false);
 	
-	document.addEventListener('keydown', function(){ KeyDown(event);});
-	document.addEventListener('keyup', function(){ KeyUp(event);});
-	document.addEventListener('mousedown', function(){ ClickDown(event);});
-	document.addEventListener('mouseup', function(){ ClickUp(event);});
-
-
-	//document.body.addEventListener("touchcancel", UpTouch, false);
+	document.addEventListener
+		('keydown', function(){ KeyDown(event);});
+	document.addEventListener
+		('keyup', function(){ KeyUp(event);});
+	document.addEventListener
+		('mousedown', function(){ ClickDown(event);});
+	document.addEventListener
+		('mouseup', function(){ ClickUp(event);});
 }
 
 
@@ -173,12 +168,13 @@ function ClickUp(event)
 function DeviceMotion(evt)
 {
 	var limit = 5;
-	if(evt.rotationRate.beta > -limit && evt.rotationRate.beta < limit)
+	if(evt.rotationRate.beta > -limit 
+		&& evt.rotationRate.beta < limit)
 	{
 		leftPressed = false;
 		rightPressed = false;
 	}
-	if(evt.rotationRate.beta < -limit)
+	else if(evt.rotationRate.beta < -limit)
 	{
 		leftPressed = true;
 		rightPressed = false;

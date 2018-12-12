@@ -36,19 +36,19 @@ class Player extends aSprite
         {
             case "Right":
                 var newpos = this.xPosition + 100;
-                this.xPosition = Lerp(parachuteMan.xPosition, newpos, .1);
+                this.xPosition = Lerp(this.xPosition, newpos, .1);
                 break;
             case "Left":
                 var newpos = this.xPosition - 100;
-                this.xPosition = Lerp(parachuteMan.xPosition, newpos, .1);
+                this.xPosition = Lerp(this.xPosition, newpos, .1);
                 break;
             case "Up":
                 var newpos = this.yPosition - 100;
-                this.yPosition = Lerp(parachuteMan.yPosition, newpos, .1);
+                this.yPosition = Lerp(this.yPosition, newpos, .1);
                 break;
             case "Down":
                 var newpos = this.yPosition + 100;
-                this.yPosition = Lerp(parachuteMan.yPosition, newpos, .1);
+                this.yPosition = Lerp(this.yPosition, newpos, .1);
                 break;
         }
     }
