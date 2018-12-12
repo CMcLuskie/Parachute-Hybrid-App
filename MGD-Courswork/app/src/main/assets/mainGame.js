@@ -155,8 +155,8 @@ function KeyUp(event)
 function ClickDown(event)
 {
 	 clicking = true;
-	 clickX = event.screenX;
-	 clickY = event.screenY;
+	 clickX = event.clientX;
+	 clickY = event.clientY;
 	 console.log("click x: " + clickX + "click y: " + clickY);
 }
 
@@ -218,7 +218,7 @@ function getRandomY()
 
 function ClickRect(x, y)
 {
-	// console.log(x);
-	// console.log(y);
+	 console.log("x " + x);
+	 console.log("y " + y);
 	return rect = {x: x, y: y, width: 1, height: 1};
 }

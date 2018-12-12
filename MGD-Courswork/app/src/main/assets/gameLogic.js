@@ -34,10 +34,13 @@ function StartState()
         InitialiseGameValues();
 
     if(clicking)
-    //if(clicking && 
-        //CollisionDetection(ClickRect(clickX / playButton.scaleX, clickY / playButton.scaleY), playButton.Collider()))
+    //if(clicking &&  CollisionDetection(ClickRect(clickX / playButton.scaleX , clickY / playButton.scaleY), playButton.Collider()))
+    {
+        console.log("here");
         if(canChangeState)  
             ChangeGameState("Play");
+    }
+        
 
     canChangeState= true;
 }
@@ -76,6 +79,9 @@ function PlayState()
     //World edge checks
     EnemyWorldCheck();
     CoinWorldCheck();
+    //Update backgroud
+    background.Update();
+    background2.Update();
     //p self explanatory tbh
     CollisionDetection();
 }
@@ -124,6 +130,8 @@ function InitialiseObjects()
 {
     //start
     startScreen = new Background(-100,0, "Art/startScreen.png", 1, 1440, 2960, 1, 1, 0,0,0,0,0);
+    //startScreen = new Background(-100,0, "Art/startScreen.png", 1, canvas.width, canvas.height, 1, 1, 0,0,0,0,0);
+
     //gamea
     parachuteMan = new Player(0, 0, "Art/parachuteMan.png", 0.5, 0.5, 260, 410, 100, 200);
 
@@ -151,7 +159,7 @@ function CollisionDetection()
 function CollectCoin(index)
 {
     console.log("cCollected COin");
-    coins[index].xPos = getRandomX();
+    coins[index].xPos = getRandomX() / coins[index].scaleX;
   
     coins[index].yPos = canvas.height / coins[index].scaleY;
     UpdateScore(100); 
